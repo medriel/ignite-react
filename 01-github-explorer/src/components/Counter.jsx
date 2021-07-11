@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 //sempre que a função começa com "use", ela é chamada de hook
+// imutabilidade = variavel não tem seu valor alterado, mas pode receber um novo valor
+// por ex. um array com varios valores
 
 export function Counter() {
 
