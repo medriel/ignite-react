@@ -1,9 +1,15 @@
-import { GetServerSideProps } from 'next';
+//import { GetServerSideProps } from 'next'; // para html estatico
+import { GetStaticProps } from 'next'
 import Head from 'next/head';
 import { SubscribeButton } from '../components/SubscribeButton';
 import { stripe } from '../services/stripe';
 
 import styles from './home.module.scss';
+
+/* Formas de fazer chamada a API */
+//Client-side
+//Server-side
+//Static Site Generation
 
 interface HomeProps {
   product: {
@@ -35,7 +41,8 @@ export default function Home({ product }: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+/* modo com html estatico */
+export const getStaticProps: GetStaticProps = async () => {
   const price = await stripe.prices.retrieve('price_1JGjcOAwTtUuEzfLylJ376Fh')
 
   const product = {
@@ -49,6 +56,26 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       product,
-    }
+    },
+    revalidate: 60 * 60 * 24, //24 hours
   }
 }
+
+/* Modo sem o html estatico */
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const price = await stripe.prices.retrieve('price_1JGjcOAwTtUuEzfLylJ376Fh')
+
+//   const product = {
+//     priceId: price.id,
+//     amount: new Intl.NumberFormat('en-US', {
+//       style: 'currency',
+//       currency: 'USD',
+//     }).format(price.unit_amount / 100), //vem sempre em centavos 
+//   };
+
+//   return {
+//     props: {
+//       product,
+//     }
+//   }
+// }
