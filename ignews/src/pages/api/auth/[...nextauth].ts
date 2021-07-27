@@ -10,3 +10,8 @@ export default NextAuth({
     }),
   ],
 })
+
+// FaunaDB - HTTP
+// DynamoDB - AWS
+
+// PostgreSQL, MongoDB - necessita de conexão com o banco
