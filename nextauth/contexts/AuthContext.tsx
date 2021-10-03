@@ -44,7 +44,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
-      const response = await api.post('session', {
+      const response = await api.post('sessions', {
         email,
         password,
       })
